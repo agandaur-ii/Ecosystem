@@ -52,5 +52,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Ecosystem-Test.sln"
+    "dotnet.defaultSolution": "Ecosystem-Test.sln",
+    "dotnet.preferCSharpExtension": true
 }
