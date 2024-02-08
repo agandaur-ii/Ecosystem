@@ -17,6 +17,9 @@ public class LivingEntity : MonoBehaviour {
     float amountRemaining = 1;
     public float consumeSpeed = 8;
 
+    public bool canReproduce;
+    public int numberOfTimesReproduced = 0;
+
     public virtual void Init (Coord coord) {
         this.coord = coord;
         transform.position = Environment.tileCentres[coord.x, coord.y];
@@ -35,7 +38,7 @@ public class LivingEntity : MonoBehaviour {
     protected virtual void Die (CauseOfDeath cause) {
         if (!dead) {
             dead = true;
-            Environment.RegisterDeath (this);
+            Environment.RegisterDeath(this);
             Destroy (gameObject);
         }
     }
