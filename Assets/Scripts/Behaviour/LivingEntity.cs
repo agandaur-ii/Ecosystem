@@ -17,6 +17,7 @@ public class LivingEntity : MonoBehaviour {
     float amountRemaining = 1;
     public float consumeSpeed = 8;
 
+    // starts off as set to true to allow initial populations to reproduce. All of intantiations must set this to false
     public bool canReproduce;
     public int numberOfTimesReproduced = 0;
 
