@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -267,9 +267,9 @@ MonoBehaviour:
     y: 602
     width: 1343
     height: 329
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 13}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
   - {fileID: 13}
@@ -279,8 +279,8 @@ MonoBehaviour:
   - {fileID: 23}
   - {fileID: 17}
   - {fileID: 24}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -300,8 +300,8 @@ MonoBehaviour:
     y: 0
     width: 561
     height: 931
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 25}
   m_Panes:
   - {fileID: 25}
@@ -839,9 +839,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 21.539846, y: -2.9633245, z: 32.967194}
+    m_Target: {x: 29.223698, y: 2.608232, z: 13.735534}
     speed: 2
-    m_Value: {x: 21.539846, y: -2.9633245, z: 32.967194}
+    m_Value: {x: 29.223698, y: 2.608232, z: 13.735534}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -887,13 +887,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.34125638, y: 0.016914137, z: -0.006141978, w: 0.93980414}
+    m_Target: {x: 0.3997751, y: -0.0123778, z: 0.005399037, w: 0.9165174}
     speed: 2
-    m_Value: {x: 0.3412544, y: 0.01691404, z: -0.006141943, w: 0.9397988}
+    m_Value: {x: 0.39839858, y: -0.012385845, z: 0.005380447, w: 0.917113}
   m_Size:
-    m_Target: 10.707294
+    m_Target: 14.480042
     speed: 2
-    m_Value: 10.707294
+    m_Value: 14.480042
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1007,7 +1007,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 21860
+  m_LastSelectedObjectID: 21830
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1048,21 +1048,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 48cbfeff30dffeffd0dffeff00e3feff96e4feff7aebfeff12edfeffa2f1feffd6a6ffff28fbffff46550000
+      m_ExpandedIDs: 28fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Plant(Clone)(Clone)(Clone)(Clone)
-        m_OriginalName: Plant(Clone)(Clone)(Clone)(Clone)
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -69214
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -1118,7 +1118,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Models/Plant
+    - Assets/Scripts/Environment
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1126,16 +1126,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Prefabs/Models/Plant
+  - Assets/Scripts/Environment
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Unity\Games\Ecosystem-Test
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 116}
-    m_SelectedIDs: 30560000
-    m_LastClickedID: 22064
-    m_ExpandedIDs: 00000000085600000a5600000c5600000e5600001056000000ca9a3b
+    m_SelectedIDs: 3e560000
+    m_LastClickedID: 22078
+    m_ExpandedIDs: 000000000c5600000e56000010560000125600001456000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1163,7 +1163,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000085600000a5600000c5600000e56000010560000
+    m_ExpandedIDs: 000000000c5600000e560000105600001256000014560000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1194,18 +1194,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c6230000b2690000be6900000c6a0000bc690000b8690000ec690000b66e0000067a000016040000907a0000585600008e56000074560000f0560000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Rabbit
-      m_OriginalName: Rabbit
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 2414
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 11}
     m_CreateAssetUtility:

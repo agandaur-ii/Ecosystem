@@ -6,6 +6,7 @@ public class Plant : LivingEntity {
     public float plantGrowthRate = 0.01f;
    
     static List<Coord> availableGrowthLocations;
+    
     protected virtual void Update () {
         if (canReproduce == false && this.transform.localScale[0] >= 1)
         {
@@ -23,6 +24,7 @@ public class Plant : LivingEntity {
             this.transform.localScale += Vector3.one * growthAmount;
         }
     }
+    
 
     private static int RandomNumberOfOffspring()
     {
