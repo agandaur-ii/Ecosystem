@@ -19,9 +19,11 @@ public class Animal : LivingEntity {
     float moveSpeed = 1.5f;
     float timeToDeathByHunger = 200;
     float timeToDeathByThirst = 200;
+    float timeToBreedingUrgeTakesOver = 100;
 
     float drinkDuration = 6;
     float eatDuration = 10;
+    float breedDuration = 15;
 
     float criticalPercent = 0.7f;
 
@@ -32,9 +34,11 @@ public class Animal : LivingEntity {
     [Header ("State")]
     public float hunger;
     public float thirst;
+    public float breedingUrge;
 
     protected LivingEntity foodTarget;
     protected Coord waterTarget;
+    protected Animal mateTarget;
 
     // Move data:
     bool animatingMovement;
@@ -70,6 +74,10 @@ public class Animal : LivingEntity {
         // Increase hunger and thirst over time
         hunger += Time.deltaTime * 1 / timeToDeathByHunger;
         thirst += Time.deltaTime * 1 / timeToDeathByThirst;
+
+        // Increase breed urge over time
+        // TO DO: add a check for age of rabbit before increasing breed urge
+        breedingUrge += Time.deltaTime * 1 / timeToBreedingUrgeTakesOver;
 
         // Animate movement. After moving a single tile, the animal will be able to choose its next action
         if (animatingMovement) {
@@ -131,6 +139,21 @@ public class Animal : LivingEntity {
             CreatePath (waterTarget);
 
         } else {
+            currentAction = CreatureAction.Exploring;
+        }
+    }
+
+    protected virtual void FindMate ()
+    {
+         
+        List<Animal> potentialMates = Environment.SensePotentialMates (coord, this);
+        if (potentialMates.Count > 0)
+        {
+            currentAction = CreatureAction.GoingToMate;
+            mateTarget = potentialMates[0];
+            CreatePath(mateTarget.coord);
+        } else
+        {
             currentAction = CreatureAction.Exploring;
         }
     }

@@ -3,6 +3,7 @@
     Resting,
     Exploring,
     GoingToFood,
+    GoingToMate,
     GoingToWater,
     Eating,
     Drinking,
