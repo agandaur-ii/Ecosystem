@@ -36,6 +36,11 @@ public class LivingEntity : MonoBehaviour {
         }
     }
 
+    public static int RandomNumberOfOffspring()
+    {
+        return Random.Range(1, 3);
+    }
+
     protected virtual void Die (CauseOfDeath cause) {
         if (!dead) {
             dead = true;

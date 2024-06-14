@@ -26,13 +26,9 @@ public class Plant : LivingEntity {
     }
     
 
-    private static int RandomNumberOfOffspring()
-    {
-        return Random.Range(1, 3);
-    }
     protected virtual void SpawnNewPlants()
     {
-        var numberOfOffspring = RandomNumberOfOffspring();
+        var numberOfOffspring = LivingEntity.RandomNumberOfOffspring();
 
         // Get coord of plant
         var currentCoord = coord;

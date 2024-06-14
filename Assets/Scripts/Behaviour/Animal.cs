@@ -11,6 +11,7 @@ public class Animal : LivingEntity {
 
     public CreatureAction currentAction;
     public Genes genes;
+    public string sex;
     public Color maleColour;
     public Color femaleColour;
 
@@ -35,6 +36,8 @@ public class Animal : LivingEntity {
     public float hunger;
     public float thirst;
     public float breedingUrge;
+    public double breedingUrgeThreshold = 0.2;
+    public bool availableToBreed;
 
     protected LivingEntity foodTarget;
     protected Coord waterTarget;
@@ -61,6 +64,9 @@ public class Animal : LivingEntity {
         base.Init (coord);
         moveFromCoord = coord;
         genes = Genes.RandomGenes (1);
+        availableToBreed = false;
+        breedingUrge = 0;
+        sex = genes.isMale ? "Male" : "Female";
 
         material.color = (genes.isMale) ? maleColour : femaleColour;
 
@@ -105,14 +111,23 @@ public class Animal : LivingEntity {
         // Get info about surroundings
 
         // Decide next action:
-        // Eat if (more hungry than thirsty) or (currently eating and not critically thirsty)
-        bool currentlyEating = currentAction == CreatureAction.Eating && foodTarget && hunger > 0;
-        if (hunger >= thirst || currentlyEating && thirst < criticalPercent) {
-            FindFood ();
-        }
-        // More thirsty than hungry
-        else {
-            FindWater ();
+        // If breeding desire threshold has been met, then hunger and thirst are no longer important
+        if (breedingUrge >= breedingUrgeThreshold) {
+            availableToBreed = true;
+            FindMate();
+        } else
+        {
+            // Eat if (more hungry than thirsty) or (currently eating and not critically thirsty)
+            bool currentlyEating = currentAction == CreatureAction.Eating && foodTarget && hunger > 0;
+            if (hunger >= thirst || currentlyEating && thirst < criticalPercent)
+            {
+                FindFood();
+            }
+            // More thirsty than hungry
+            else
+            {
+                FindWater();
+            }
         }
 
         Act ();
@@ -150,11 +165,12 @@ public class Animal : LivingEntity {
         if (potentialMates.Count > 0)
         {
             currentAction = CreatureAction.GoingToMate;
+            // TO DO: add in preferences for mate choice
             mateTarget = potentialMates[0];
             CreatePath(mateTarget.coord);
         } else
         {
-            currentAction = CreatureAction.Exploring;
+            currentAction = CreatureAction.SearchingForMate;
         }
     }
 
@@ -167,6 +183,9 @@ public class Animal : LivingEntity {
         switch (currentAction) {
             case CreatureAction.Exploring:
                 StartMoveToCoord (Environment.GetNextTileWeighted (coord, moveFromCoord));
+                break;
+            case CreatureAction.SearchingForMate:
+                StartMoveToCoord(Environment.GetNextTileWeighted(coord, moveFromCoord));
                 break;
             case CreatureAction.GoingToFood:
                 if (Coord.AreNeighbours (coord, foodTarget.coord)) {
@@ -181,6 +200,15 @@ public class Animal : LivingEntity {
                 if (Coord.AreNeighbours (coord, waterTarget)) {
                     LookAt (waterTarget);
                     currentAction = CreatureAction.Drinking;
+                } else {
+                    StartMoveToCoord (path[pathIndex]);
+                    pathIndex++;
+                }
+                break;
+            case CreatureAction.GoingToMate:
+                if (Coord.AreNeighbours (coord, mateTarget.coord)) {
+                    LookAt(mateTarget.coord);
+                    currentAction = CreatureAction.Mating;
                 } else {
                     StartMoveToCoord (path[pathIndex]);
                     pathIndex++;
@@ -230,6 +258,17 @@ public class Animal : LivingEntity {
                 thirst -= Time.deltaTime * 1 / drinkDuration;
                 thirst = Mathf.Clamp01 (thirst);
             }
+        } else if (currentAction == CreatureAction.Mating) {
+            if (!genes.isMale)
+            {
+                SpawnNewAnimal();
+                Debug.Log("New Animal!");
+            } else {
+                numberOfTimesReproduced += 1;
+            }
+            breedingUrge = 0;
+            availableToBreed = false;
+            currentAction = CreatureAction.Exploring;
         }
     }
 
@@ -248,6 +287,37 @@ public class Animal : LivingEntity {
             moveTime = 0;
             ChooseNextAction ();
         }
+    }
+
+    protected virtual void SpawnNewAnimal()
+    {
+        var numberOfOffspring = RandomNumberOfOffspring();
+
+        // Get coord of animal
+        var currentCoord = coord;
+
+        // Get nearby walkable coords, depending on numberOfOffspring
+        for (int i = 0; i < numberOfOffspring; i++)
+        {
+            var coordOne = Environment.GetNextTileRandom(currentCoord);
+            var coordTwo = Environment.GetNextTileRandom(coordOne);
+
+            // Spawn animal(s) at those coords
+            var entity = Instantiate(this);
+            entity.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            entity.Init(coordTwo);
+            entity.availableToBreed = false;
+           //entity.breedingUrge = 0;
+            //entity.genes = Genes.RandomGenes(1);
+            //sex = genes.isMale ? "Male" : "Female";
+            entity.gameObject.name = entity.gameObject.name + " - (" + entity.sex + ")";
+            Environment.speciesMaps[entity.species].Add(entity, coordTwo);
+
+            entity.currentAction = CreatureAction.Exploring;
+        }
+
+        numberOfTimesReproduced += 1;
+
     }
 
     void OnDrawGizmosSelected () {
